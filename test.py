@@ -3,7 +3,10 @@ import os
 import requests
 from crewai import LLM
 from icecream import ic
+from langchain_together import Together
 from litellm import completion
+
+from src.data_insight_analysis.llm.llms import llm_together
 
 
 def call_huggingface_llm_api(
@@ -41,8 +44,19 @@ def call_huggingface_llm(
         ic(f"An error occurred: {e}")
 
 
+def call_together_llm(
+    input: str = "Tell about 5K running. What are the benefits of running 5K daily?",
+):
+    ic(input)
+    try:
+        response = llm_together.invoke(input)
+        ic(response)
+    except Exception as e:
+        ic(f"An error occurred: {e}")
+
+
 # # Call the function to test
-call_huggingface_llm()
+call_together_llm()
 
 
 #  free models to test with the API are:

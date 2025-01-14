@@ -4,7 +4,7 @@ from crewai.llm import LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileReadTool
 
-from .llm.llms import llm_google_gemini, llm_groq_llama_3, llm_haggingsface
+from .llm.llms import llm_google_gemini, llm_groq_llama_3, llm_together
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -32,7 +32,7 @@ class DataInsightAnalysis:
             config=self.agents_config["suggestion_generation_agent"],
             verbose=True,
             tools=[csv_tool],
-            llm=llm_groq_llama_3,
+            llm=llm_together,
         )
 
     # reporting_agent
@@ -42,7 +42,7 @@ class DataInsightAnalysis:
             config=self.agents_config["reporting_agent"],
             verbose=True,
             tools=[csv_tool],
-            llm=llm_google_gemini,
+            llm=llm_groq_llama_3,
         )
 
     # chart_generation_agent
@@ -52,7 +52,7 @@ class DataInsightAnalysis:
             config=self.agents_config["chart_generation_agent"],
             verbose=True,
             allow_code_execution=True,
-            llm=llm_groq_llama_3,
+            llm=llm_google_gemini,
         )
 
     # To learn more about structured task outputs,
